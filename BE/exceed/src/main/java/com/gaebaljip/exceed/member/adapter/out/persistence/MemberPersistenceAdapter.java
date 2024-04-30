@@ -1,6 +1,7 @@
 package com.gaebaljip.exceed.member.adapter.out.persistence;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -34,7 +35,7 @@ public class MemberPersistenceAdapter implements MemberPort, MonthlyTargetPort {
 
     /** 회원 수정 기능 구현 후 -> Map<LocalDate date, MemberModel> 변경 */
     @Override
-    public Member query(Long memberId, LocalDate date) {
+    public Member query(Long memberId, LocalDateTime date) {
         MemberEntity memberEntity =
                 memberRepository
                         .findById(memberId)
@@ -69,5 +70,10 @@ public class MemberPersistenceAdapter implements MemberPort, MonthlyTargetPort {
             throw MemberNotCheckedException.EXECPTION;
         }
         return member;
+    }
+
+    @Override
+    public Optional<MemberEntity> findByIdAndDate(Long memberId, LocalDateTime date) {
+        return memberRepository.findByIdAndDate(memberId, date);
     }
 }
