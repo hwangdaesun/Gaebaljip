@@ -74,3 +74,20 @@ springdoc:
   model-and-view-allowed: true
   default-consumes-media-type: application/json
   default-produces-media-type: application/json
+
+
+ableAutoComplete: true
+# Actuator
+
+management:
+  server:
+    port: 8081
+    endpoint:
+      health:
+        show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env, beans"
+
